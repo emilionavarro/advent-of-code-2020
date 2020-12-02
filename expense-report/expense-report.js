@@ -11,7 +11,7 @@ const getFinalProduct = (expenses) => {
         for (let j = 0; j < len; j++) {
 
             var second = expenses[j];
-            
+
             for (let v = 0; v < len; v++) {
 
                 var third = expenses[v];
@@ -30,6 +30,8 @@ const getFinalProduct = (expenses) => {
 
     return first * second * third;
 }
+
+
 
 
 fs.readFile('expenses.json', function read(err, data) {
