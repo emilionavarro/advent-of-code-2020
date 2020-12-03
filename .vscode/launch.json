@@ -13,7 +13,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/expense-report.js"
+            "program": "${workspaceFolder}/password-philosophy/main.js"
         }
     ]
 }
