@@ -13,7 +13,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/day-3/main.js"
+            "program": "${workspaceFolder}/passport-processing/main.js"
         }
     ]
 }
