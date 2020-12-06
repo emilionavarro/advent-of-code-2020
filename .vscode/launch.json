@@ -13,7 +13,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/passport-processing/main.js"
+            "program": "${workspaceFolder}/binary-boarding/main.js"
         }
     ]
 }
