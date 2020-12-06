@@ -90,7 +90,7 @@ const findMissingBoardingPass = () => boardingPasses
     .find((id, index, obj) => id !== index + obj[0]) - 1;
 
 
-const mutatePasswords = (path, part) => {
+const mutateBoardingPasses = (path, part) => {
 
     const readInterface = readline.createInterface({
         input: fs.createReadStream(path),
@@ -112,5 +112,5 @@ const mutatePasswords = (path, part) => {
 
 
 
-mutatePasswords(`${process.cwd()}/binary-boarding/boarding-passes.dat`, 2);
+mutateBoardingPasses(`${process.cwd()}/binary-boarding/boarding-passes.dat`, 2);
 
