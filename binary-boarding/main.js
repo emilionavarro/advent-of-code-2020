@@ -23,12 +23,12 @@ const calculateColumn = (boardingPass) => boardingPass.columnSeq.reduce((acc, cu
     if (curr === 'R') {
         return {
             ...acc,
-            min: Math.floor((acc.max + acc.min) / 2) + 1 
+            min: Math.floor((acc.max + acc.min) / 2) + 1
         }
     } else {
         return {
             ...acc,
-            max: Math.floor((acc.max + acc.min) / 2) 
+            max: Math.floor((acc.max + acc.min) / 2)
         }
     }
 
@@ -59,7 +59,38 @@ const calculateRow = (boardingPass) => boardingPass.rowSeq.reduce((acc, curr) =>
 const calculateSeatId = (boardingPass) =>
     calculateRow(boardingPass) * 8 + calculateColumn(boardingPass);
 
-const mutatePasswords = (path) => {
+const boardingPassSequenceSort = (a, b) => {
+
+    let first = a.rowSeq.join('');
+    let second = b.rowSeq.join('');
+
+    if (first > second) {
+        return -1;
+    } else if (first == second) {
+
+        return a.columnSeq.join('') >= b.columnSeq.join('') ? 1 : -1;
+
+    } else {
+        return 1;
+    }
+}
+
+const findLargestBoardingPass = () => {
+
+    const sortedBoardingPasses = boardingPasses.sort(boardingPassSequenceSort);
+    const largestBoardingPass = sortedBoardingPasses[sortedBoardingPasses.length - 1];
+
+    console.log(calculateSeatId(largestBoardingPass));
+}
+
+
+const findMissingBoardingPass = () => boardingPasses
+    .sort(boardingPassSequenceSort)
+    .map(b => calculateSeatId(b))
+    .find((id, index, obj) => id !== index + obj[0]) - 1;
+
+
+const mutatePasswords = (path, part) => {
 
     const readInterface = readline.createInterface({
         input: fs.createReadStream(path),
@@ -73,29 +104,13 @@ const mutatePasswords = (path) => {
     readInterface.on('error', console.log);
     readInterface.on('close', () => {
 
-        const sortedBoardingPasses = boardingPasses.sort((a, b) => {
+        if (part === 1) findLargestBoardingPass();
+        else console.log(findMissingBoardingPass());
 
-            let first = a.rowSeq.join('');
-            let second = b.rowSeq.join('');
-
-            if (first > second) {
-                return -1;
-            } else if (first == second) {
-
-                return a.columnSeq.join('') >= b.columnSeq.join('') ? 1 : -1;
-
-            } else {
-                return 1;
-            }
-        });
-
-        const largestBoardingPass = sortedBoardingPasses[sortedBoardingPasses.length - 1];
-
-        console.log(calculateSeatId(largestBoardingPass));
     })
 }
 
 
 
-mutatePasswords(`${process.cwd()}/binary-boarding/boarding-passes.dat`);
+mutatePasswords(`${process.cwd()}/binary-boarding/boarding-passes.dat`, 2);
 
