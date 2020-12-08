@@ -13,7 +13,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/binary-boarding/main.js"
+            "program": "${workspaceFolder}/handy-haversacks/part2.js"
         }
     ]
 }
